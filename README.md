@@ -1,4 +1,4 @@
-# Aassignment 1
+# Assignment 1
 Astro-Statistics and Cosmology Assignments 
 
 
