@@ -1,20 +1,20 @@
-"""Astro-statistics - Assignment 2: Question 1
+"""Astro-statistics - Assignment 2: Question 3
    @author: ronaldo"""
-
+   
 import numpy as np
 import random
 import matplotlib.pyplot as plt
 
 n = 100000
-r = np.linspace(2,12,13)
-count = np.zeros(13)
+r = np.linspace(2,12,11)
+count = np.zeros(11)
 out = []
 
 def roll_dice(n = 100000):
     
     for i in range(n):
         # Roll each dice
-        die1 = random.randint(1, 6)
+        die1 = random.choice([0,0,0,6,6,6]) # Now our first die is modified
         die2 = random.randint(1, 6)
         
         # Sum the values to get the score
@@ -23,21 +23,16 @@ def roll_dice(n = 100000):
         
         # Conditions to add to the count
         for j in range(len(r)):
-            if score == j:
+            if score == j+2:
                 count[j] += 1
     return count/n
 
 probability = roll_dice()
 print("Probabilities are: ", np.round(probability*100,2),"%")
 
-fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(8, 4))
-fig.suptitle('Probability Distribution')
-ax1.scatter(r, probability)
-ax1.set_title('Scatter Plot')
-ax1.set(xlabel='$X$', ylabel='$P(X)$')
-ax2.hist(out, bins = np.arange(2, 14), edgecolor='black')
-ax2.set_title('Histrogram')
-ax2.set(xlabel='Outcome', ylabel='Frequency')
-
-fig.tight_layout()
+plt.figure(1, dpi = 120)
+plt.hist(out, bins = np.arange(1, 14), edgecolor='black')
+plt.xlabel("Outcomes")
+plt.ylabel("Frequency")
+plt.title("Distribution for relabeled dice $\{0,0,0,6,6,6\}$ and $\{1,2,3,4,5,6\}$ ")
 plt.show()
